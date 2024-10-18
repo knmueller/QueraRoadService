@@ -100,7 +100,3 @@ There are a few test setup in `/api-test-collection/insomnia/Insomnia_Road-servi
 file can be imported to the [Insomnia app](https://insomnia.rest/) and run against the service. 
 
 There shouldn't be any environment used except for the `url`
-
-### TODO 
-- add insomnia collection to repo
-- docker (i think completed ?)
