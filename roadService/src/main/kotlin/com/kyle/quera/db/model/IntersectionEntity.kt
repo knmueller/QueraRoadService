@@ -1,6 +1,5 @@
 package com.kyle.quera.db.model
 
-import com.kyle.quera.db.common.DAOFacade
 import com.kyle.quera.db.common.EntityWrapper
 import com.kyle.quera.db.common.PagingAndSorting
 import com.kyle.quera.model.Intersection
@@ -31,8 +30,6 @@ data class IntersectionEntity(
     @KomapperUpdatedAt
     val updatedAt: Nothing
 )
-
-typealias IntersectionDAOFacade = DAOFacade<Intersection>
 
 // This should contain all the Komapper specific implementations
 class IntersectionTable : EntityWrapper<_IntersectionEntity, Intersection>(IntersectionMeta.intersection) {

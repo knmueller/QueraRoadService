@@ -1,12 +1,9 @@
 package com.kyle.quera.db.common
 
-import DatabaseImpl
 import com.common.ktor.server.util.getPropertyOrThrow
-import com.kyle.quera.db.model.IntersectionDAOFacade
+import com.kyle.quera.config.DatabaseImpl
 import com.kyle.quera.db.model.IntersectionTable
-import com.kyle.quera.db.model.RoadDAOFacade
 import com.kyle.quera.db.model.RoadTable
-import com.kyle.quera.db.model.SignDAOFacade
 import com.kyle.quera.db.model.SignTable
 import com.kyle.quera.model.Intersection
 import com.kyle.quera.model.Road
@@ -29,8 +26,6 @@ import org.koin.dsl.module
 import org.komapper.core.dsl.expression.SortExpression
 import org.komapper.core.dsl.operator.asc
 import org.komapper.core.dsl.operator.desc
-import org.komapper.core.dsl.query.EntityStore
-import org.komapper.core.dsl.query.EntityStoreQuery
 import org.komapper.core.dsl.query.Query
 import org.komapper.core.dsl.query.QueryScope
 import org.slf4j.LoggerFactory
@@ -39,24 +34,15 @@ import org.slf4j.LoggerFactory
 fun databaseModule(environment: ApplicationEnvironment) =
     module {
         println("app config = ${environment.config}")
-        val logLevel = LogLevel.DEBUG // if (environment.developmentMode) LogLevel.DEBUG else LogLevel.WARN
+        val logLevel = LogLevel.DEBUG
         single<Database> { DatabaseImpl(logLevel) }
-//        single<IntersectionDAOFacade> { IntersectionTable() }
-//        single<RoadDAOFacade> { RoadTable() }
-//        single<SignDAOFacade> { SignTable() }
-        singleOf(::IntersectionTable) { bind<DAOFacade<Intersection>>() } // this also works
-        singleOf(::RoadTable) { bind<DAOFacade<Road>>() } // this also works
-        singleOf(::SignTable) { bind<DAOFacade<Sign>>() } // this also works
-
-//        bean("a") { ComponentA() as InterfaceComponent<String> }
-//        bean("b") { ComponentB() as InterfaceComponent<Int> }
-
+        singleOf(::IntersectionTable) { bind<DAOFacade<Intersection>>() }
+        singleOf(::RoadTable) { bind<DAOFacade<Road>>() }
+        singleOf(::SignTable) { bind<DAOFacade<Sign>>() }
     }
 
-// https://github.com/1gravity/Ktor-Template/blob/31d654e6e98d3cb855b1844858f1f7dc6da74619/account-service/src/main/kotlin/com/onegravity/accountservice/persistence/database/Database.kt
 interface Database {
     suspend fun <T> runQuery(block: QueryScope.() -> Query<T>): T
-//    suspend fun runQuery(query: EntityStoreQuery): EntityStore
 }
 
 abstract class DatabaseBaseImpl(logLevel: LogLevel = LogLevel.WARN, cleanDB: Boolean = false) :
@@ -112,7 +98,6 @@ abstract class DatabaseBaseImpl(logLevel: LogLevel = LogLevel.WARN, cleanDB: Boo
 
 abstract class R2DbImpl<T>(val r2DbImpl: T) {
     abstract suspend fun <T> runQuery(block: QueryScope.() -> Query<T>): T
-//    abstract suspend fun runQuery(query: EntityStoreQuery): EntityStore
 }
 
 data class PagingAndSorting(
@@ -131,9 +116,6 @@ abstract class EntityWrapper<T : `org.komapper.core.dsl.metamodel`.EntityMetamod
     protected abstract suspend fun find(id: Int): E
     protected abstract suspend fun findAll(pas: PagingAndSorting): List<E>
     protected abstract suspend fun findAll(pas: PagingAndSorting, block: QueryScope.() -> Query<List<E>>): List<E>
-//    private suspend fun findAll2(query: EntityStoreQuery): EntityStore {
-//        return database.runQuery(query)
-//    }
 
     override suspend fun countResource(): Long = count()
     override suspend fun createResource(resource: E): E = create(resource)
@@ -142,7 +124,6 @@ abstract class EntityWrapper<T : `org.komapper.core.dsl.metamodel`.EntityMetamod
     override suspend fun getResources(pagingAndSorting: PagingAndSorting): List<E> =
         findAll(pagingAndSorting)
     override suspend fun getResources(pagingAndSorting: PagingAndSorting, block: QueryScope.() -> Query<List<E>>): List<E> = findAll(pagingAndSorting, block)
-//    override suspend fun getResources2(query: EntityStoreQuery): EntityStore = findAll2(query)
 
     fun toOrderBy(pas: PagingAndSorting): List<SortExpression> {
         val sortParam = pas.sort.split(",")

@@ -1,6 +1,5 @@
 package com.kyle.quera.db.model
 
-import com.kyle.quera.db.common.DAOFacade
 import com.kyle.quera.db.common.EntityWrapper
 import com.kyle.quera.db.common.PagingAndSorting
 import com.kyle.quera.model.Sign
@@ -33,8 +32,6 @@ data class SignEntity(
     @KomapperUpdatedAt
     val updatedAt: Nothing
 )
-
-typealias SignDAOFacade = DAOFacade<Sign>
 
 // This should contain all the Komapper specific implementations
 class SignTable : EntityWrapper<_SignEntity, Sign>(SignMeta.sign) {

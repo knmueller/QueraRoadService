@@ -42,25 +42,6 @@ class RoadsService : KoinComponent {
 
         val roads: List<Road> = if (roadsRequest.intersectionId != null) {
             // find all roads with the same intersection
-
-//            val query = QueryDsl.from(RoadMeta.road)
-//                .innerJoin(IntersectionMeta.intersection) {
-//                    RoadMeta.road.intersectionId eq IntersectionMeta.intersection.id
-//                }
-//                .where { RoadMeta.road.intersectionId eq roadsRequest.intersectionId }
-//                .orderBy(db.toOrderBy(pas))
-//                .offset(pas.page * pas.size)
-//                .limit(pas.size)
-//                .includeAll()
-//
-//            val store = db.getResources2(query)
-//            for (road in store.roads()) {
-////                val intersection = road.intersections(store)
-//                logger.info("Road $road")
-//            }
-//
-//            store[RoadMeta.road].toList()
-
             db.getResources(pas) {
                 QueryDsl.from(RoadMeta.road)
                     .innerJoin(IntersectionMeta.intersection) {

@@ -1,6 +1,5 @@
 package com.kyle.quera.db.model
 
-import com.kyle.quera.db.common.DAOFacade
 import com.kyle.quera.db.common.EntityWrapper
 import com.kyle.quera.db.common.PagingAndSorting
 import com.kyle.quera.model.Road
@@ -41,8 +40,6 @@ data class RoadEntity(
     @KomapperUpdatedAt
     val updatedAt: Nothing
 )
-
-typealias RoadDAOFacade = DAOFacade<Road>
 
 // This should contain all the Komapper specific implementations
 class RoadTable : EntityWrapper<_RoadEntity, Road>(RoadMeta.road) {
@@ -87,10 +84,6 @@ class RoadTable : EntityWrapper<_RoadEntity, Road>(RoadMeta.road) {
     override suspend fun findAll(pas: PagingAndSorting, block: QueryScope.() -> Query<List<Road>>): List<Road> {
         return database.runQuery(block)
     }
-
-//    override suspend fun findAll2(query: EntityStoreQuery): EntityStore {
-//        return database.runQuery(query)
-//    }
 
     override fun close() {
         // Intentionally blank

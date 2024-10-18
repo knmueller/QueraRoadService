@@ -1,3 +1,5 @@
+package com.kyle.quera.config
+
 import com.kyle.quera.db.common.DatabaseBaseImpl
 import com.kyle.quera.db.common.R2DbImpl
 import io.r2dbc.h2.H2ConnectionFactoryMetadata

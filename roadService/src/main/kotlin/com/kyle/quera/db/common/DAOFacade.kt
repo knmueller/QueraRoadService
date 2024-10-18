@@ -1,7 +1,5 @@
 package com.kyle.quera.db.common
 
-import org.komapper.core.dsl.query.EntityStore
-import org.komapper.core.dsl.query.EntityStoreQuery
 import org.komapper.core.dsl.query.Query
 import org.komapper.core.dsl.query.QueryScope
 import java.io.Closeable
@@ -39,8 +37,6 @@ interface DAOFacade<T> : Closeable {
      * [block] - block containing custom QueryDsl to search
      */
     suspend fun getResources(pagingAndSorting: PagingAndSorting, block: QueryScope.() -> Query<List<T>>): List<T>
-
-//    suspend fun getResources2(query: EntityStoreQuery): EntityStore
 
     /**
      * Creates a resource from an object

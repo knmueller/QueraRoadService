@@ -25,7 +25,8 @@ class SignsRequest(val roadId: Int? = null, val sort: String = "createdAt,desc",
 fun Routing.configureSignRoutes() {
     val svc: SignsService by inject(SignsService::class.java)
 
-//    signsDocumentation()
+    signsDocumentation()
+
     // Get all signs
     get<SignsRequest> { sign ->
         println("INJECTED get ${svc::class.java}")
@@ -56,7 +57,7 @@ fun Routing.configureSignRoutes() {
     }
 }
 
-fun Route.signDocumentation() {
+fun Route.signsDocumentation() {
     // TODO
 
 //    install(NotarizedResource<CoursesRequest>()) {
