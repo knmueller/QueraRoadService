@@ -27,8 +27,9 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import kotlinx.coroutines.runBlocking
 import kotlinx.datetime.Clock
-import kotlinx.datetime.LocalDateTime
+import java.time.LocalDateTime
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toJavaLocalDateTime
 import kotlinx.datetime.toLocalDateTime
 import kotlinx.serialization.ExperimentalSerializationApi
 import org.junit.jupiter.api.Test
@@ -80,7 +81,7 @@ class SignTest : KoinTest {
     /**
      * Specifies a fixed Date for testing.
      */
-    private val date = LocalDateTime(2010, 1, 1, 0, 0, 0)
+    private val date = kotlinx.datetime.LocalDateTime(2010, 1, 1, 0, 0, 0).toJavaLocalDateTime()
 
     @Test
     fun mockProviderTest() = testApplication {
@@ -309,8 +310,8 @@ class SignTest : KoinTest {
                     Sign(
                         1,
                         signPostBody.roadId,
-                        Clock.System.now().toLocalDateTime(TimeZone.UTC),
-                        Clock.System.now().toLocalDateTime(TimeZone.UTC)
+                        Clock.System.now().toLocalDateTime(TimeZone.UTC).toJavaLocalDateTime(),
+                        Clock.System.now().toLocalDateTime(TimeZone.UTC).toJavaLocalDateTime()
                     )
         }
 

@@ -1,6 +1,3 @@
-import org.gradle.api.execution.TaskExecutionGraph
-
-
 plugins {
     `java-library`
     alias(libs.plugins.kotlinJvm)
@@ -19,7 +16,6 @@ java {
 
 dependencies {
     implementation(projects.shared)
-
     implementation(libs.logback)
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.server.cors)
@@ -43,18 +39,3 @@ tasks.withType<Jar> {
         enabled = false
     }
 }
-
-//gradle.taskGraph.whenReady {
-//
-//    println("Found task graph: $this")
-//    println("Found " + this.allTasks.size + " tasks.")
-//    this.allTasks.forEach { task ->
-//        println()
-//        println("----- " + task + " -----")
-//        println("depends on tasks: " + task.dependsOn)
-//        println("inputs: ")
-//        task.inputs.files.files.forEach { f -> println(" - $f")}
-//        println("outputs: ")
-//        task.outputs.files.files.forEach { f -> println(" + $f")}
-//    }
-//}

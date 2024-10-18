@@ -1,6 +1,6 @@
 package com.kyle.quera.model
 
-import kotlinx.datetime.LocalDateTime
+import java.time.LocalDateTime
 import kotlinx.serialization.Serializable
 
 object SignMeta
@@ -9,6 +9,8 @@ object SignMeta
 data class Sign(
     var id: Int = 0,
     val roadId: Int, // FK
+    @Serializable(with = LocalDateTimeSerializer::class)
     val createdAt: LocalDateTime? = null,
+    @Serializable(with = LocalDateTimeSerializer::class)
     val updatedAt: LocalDateTime? = null,
 )

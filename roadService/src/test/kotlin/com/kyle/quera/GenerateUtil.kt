@@ -5,6 +5,7 @@ import com.kyle.quera.model.Road
 import com.kyle.quera.model.Sign
 import com.kyle.quera.model.SurfaceType
 import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.toJavaLocalDateTime
 import kotlin.random.Random
 import kotlin.random.nextInt
 
@@ -17,7 +18,8 @@ fun Intersection.Companion.generate(): Sequence<Intersection> = sequence {
             Random.nextInt(0, 24),
             Random.nextInt(0, 60),
             Random.nextInt(0, 60)
-        )
+        ).toJavaLocalDateTime()
+
         yield(
             Intersection(
                 id = Random.nextInt(0, 100),
@@ -30,7 +32,7 @@ fun Intersection.Companion.generate(): Sequence<Intersection> = sequence {
                     0,
                     0,
                     0
-                )
+                ).toJavaLocalDateTime()
             )
         )
     }
@@ -45,7 +47,7 @@ fun Road.Companion.generate(intersectionId: Int): Sequence<Road> = sequence {
             Random.nextInt(0, 24),
             Random.nextInt(0, 60),
             Random.nextInt(0, 60)
-        )
+        ).toJavaLocalDateTime()
         yield(
             Road(
                 id = Random.nextInt(0, 100),
@@ -59,7 +61,7 @@ fun Road.Companion.generate(intersectionId: Int): Sequence<Road> = sequence {
                     0,
                     0,
                     0
-                )
+                ).toJavaLocalDateTime()
             )
         )
     }
@@ -74,7 +76,7 @@ fun Sign.Companion.generate(roadId: Int): Sequence<Sign> = sequence {
             Random.nextInt(0, 24),
             Random.nextInt(0, 60),
             Random.nextInt(0, 60)
-        )
+        ).toJavaLocalDateTime()
         yield(
             Sign(
                 id = Random.nextInt(0, 100),
@@ -87,7 +89,7 @@ fun Sign.Companion.generate(roadId: Int): Sequence<Sign> = sequence {
                     0,
                     0,
                     0
-                )
+                ).toJavaLocalDateTime()
             )
         )
     }
