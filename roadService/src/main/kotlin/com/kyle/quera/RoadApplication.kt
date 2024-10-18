@@ -3,7 +3,6 @@ package com.kyle.quera
 import com.common.ktor.server.configureCommonContentNegotiation
 import com.common.ktor.server.configureCommonCors
 import com.common.ktor.server.configureCommonStatusPages
-import com.common.ktor.server.configureCommonValidation
 import com.kyle.quera.config.configureKoin
 import com.kyle.quera.route.configureIntersectionRoutes
 import com.kyle.quera.route.configureRoadRoutes
@@ -27,13 +26,12 @@ fun Application.module() {
         log.info("Koin started.")
     }
 
-    // this seems to be needed for unit testing.
+    // this seems to be needed for unit testing so Koin is not set up more than once.
     if (GlobalContext.getOrNull() == null) {
         configureKoin()
     }
     configureCommonCors()
     configureCommonContentNegotiation()
-    configureCommonValidation()
     configureCommonStatusPages()
 
     install(Resources)

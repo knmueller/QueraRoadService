@@ -20,13 +20,12 @@ docker run -d -p 12345:8081 -p 12346:8082 --name road-app road-app
 
 ## KtorServerCommon library
 This library has some common handling that could be used across ktor apps. Currently, it has
-functions for setting up CORS, ContentNegotiation, common exception handling, and config parsing.
-
+functions for setting up CORS (currently this is only anyHost -- not for production),
+ContentNegotiation, common exception handling, and config parsing.
 
 ## shared kotlin multiplatform section
 Separate project to house some common types, constants, and utilities. The type definitions for
-`Intersection`, `Road`, and `Sign` are here, along with a few common response types. 
-
+`Intersection`, `Road`, and `Sign` are here, along with a few common response types.
 
 ## Road service 
 
@@ -51,8 +50,8 @@ This app employs:
 - `Koin` for dependency injection
 - R2dbc backed by an H2 in-memory database for reactive relational database access
 - Komapper as a ORM
-- Ktor `Resources` to describe routes
-- a thirdparty library `name.nkonev.r2dbc-migrate:r2dbc-migrate-core` for auto setup/run of db migrations.
+- Ktor (3.0.0) and Ktor's `Resources` to describe routes
+- a third-party library `name.nkonev.r2dbc-migrate:r2dbc-migrate-core` for auto setup/run of db migrations.
 
 ##### top level 
 RoadApplication - Set up the ktor app 
@@ -93,13 +92,14 @@ Connection information:
 
 
 ### TODO 
-- request validation
+X - request validation
 - comment code
 - this readme
 - more unittests
 - api tests
+- add insomnia collection to repo
 - PUT apis
 - docker (i think completed ?)
 - caching
-- CORS correct ?
 - remove unused imports and code
+X - enum

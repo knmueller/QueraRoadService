@@ -5,10 +5,16 @@ import kotlinx.serialization.Serializable
 
 object RoadMeta
 
+enum class SurfaceType {
+    asphalt,
+    concrete,
+    gravel,
+}
+
 @Serializable
 data class Road(
     val id: Int = 0,
-    val surfaceType: String, // todo enum
+    val surfaceType: SurfaceType,
     val intersectionId: Int, // FK
     val createdAt: LocalDateTime? = null,
     val updatedAt: LocalDateTime? = null,

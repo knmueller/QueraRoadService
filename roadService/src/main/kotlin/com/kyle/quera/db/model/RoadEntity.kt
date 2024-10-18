@@ -7,10 +7,12 @@ import com.kyle.quera.model.Road
 import com.kyle.quera.model.RoadMeta
 import io.ktor.server.plugins.BadRequestException
 import io.r2dbc.spi.R2dbcDataIntegrityViolationException
+import org.komapper.annotation.EnumType
 import org.komapper.annotation.KomapperAggregateRoot
 import org.komapper.annotation.KomapperAutoIncrement
 import org.komapper.annotation.KomapperCreatedAt
 import org.komapper.annotation.KomapperEntityDef
+import org.komapper.annotation.KomapperEnum
 import org.komapper.annotation.KomapperExperimentalAssociation
 import org.komapper.annotation.KomapperId
 import org.komapper.annotation.KomapperManyToOne
@@ -31,6 +33,7 @@ data class RoadEntity(
     @KomapperId
     @KomapperAutoIncrement
     val id: Nothing,
+    @KomapperEnum(EnumType.NAME)
     val surfaceType: Nothing,
     val intersectionId: Nothing,
     @KomapperCreatedAt
