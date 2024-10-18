@@ -28,6 +28,9 @@ dependencies {
     implementation(libs.koin.ktor)
     ksp(libs.koin.ksp.compiler)
 
+    // Metrics
+    implementation("io.ktor:ktor-server-metrics")
+
     testImplementation(kotlin("test"))
     testImplementation(libs.ktor.server.tests)
 }

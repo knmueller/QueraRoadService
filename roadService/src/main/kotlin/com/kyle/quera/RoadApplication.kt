@@ -2,6 +2,7 @@ package com.kyle.quera
 
 import com.common.ktor.server.configureCommonContentNegotiation
 import com.common.ktor.server.configureCommonCors
+import com.common.ktor.server.configureCommonMetrics
 import com.common.ktor.server.configureCommonStatusPages
 import com.kyle.quera.config.configureKoin
 import com.kyle.quera.route.configureIntersectionRoutes
@@ -36,6 +37,7 @@ fun Application.module() {
     configureCommonCors()
     configureCommonContentNegotiation()
     configureCommonStatusPages()
+    configureCommonMetrics()
 
     install(Resources)
     rootPath = "/api/1"
