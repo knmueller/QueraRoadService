@@ -20,10 +20,6 @@ kotlin {
                 implementation(libs.koin.core)
                 implementation(libs.koin.annotations)
 
-                // ktor-client-core is not yet published in a released image for WASM. No longer need
-                // this dep in shared, but if needed it has to go in each individual build.gradle.kts
-                // until there is a non-beta release.
-//            implementation(libs.ktor.client.core)
                 implementation(libs.kotlinx.coroutines.core)
                 api(libs.kotlinx.datetime)
                 implementation(libs.kotlinx.serialize.json)

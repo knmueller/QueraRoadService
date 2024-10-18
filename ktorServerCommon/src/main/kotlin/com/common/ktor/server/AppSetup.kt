@@ -41,7 +41,8 @@ fun Application.configureCommonStatusPages() {
             val errDetails = if (cause.message != null) cause.message!! else ""
             call.respond(HttpStatusCode.BadRequest, BadRequestErrorRsp.apply { details = errDetails })
         }
-        exception<Exception> { call, _ ->
+        exception<Exception> { call, cause ->
+            cause.printStackTrace()
             call.respond(HttpStatusCode.InternalServerError, InternalServerErrorRsp)
         }
     }
