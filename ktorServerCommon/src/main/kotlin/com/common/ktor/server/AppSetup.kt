@@ -4,6 +4,7 @@ import com.kyle.quera.Utils
 import com.kyle.quera.model.BadRequestErrorRsp
 import com.kyle.quera.model.InternalServerErrorRsp
 import com.kyle.quera.model.NotFoundErrorRsp
+import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
@@ -19,6 +20,7 @@ import java.util.NoSuchElementException
 fun Application.configureCommonCors() {
     install(CORS) {
         anyHost()
+        allowHeader(HttpHeaders.ContentType)
     }
 }
 

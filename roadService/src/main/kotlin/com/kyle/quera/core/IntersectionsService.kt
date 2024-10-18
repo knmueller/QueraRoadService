@@ -17,9 +17,8 @@ class IntersectionsService : KoinComponent {
         return db.createResource(newIntersection)
     }
 
-    // TODO update resource
-    suspend fun updateResource(intersection: Intersection) {
-        throw NotImplementedError("update not yet implemented")
+    suspend fun updateResource(intersection: Intersection): Intersection {
+        return db.updateResource(intersection)
     }
 
     suspend fun getResource(id: Int): Intersection {

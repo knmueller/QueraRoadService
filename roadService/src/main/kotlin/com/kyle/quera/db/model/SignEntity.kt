@@ -52,6 +52,17 @@ class SignTable : EntityWrapper<_SignEntity, Sign>(SignMeta.sign) {
         }
     }
 
+    override suspend fun update(resource: Sign): Sign {
+        val numUpdated = database.runQuery {
+            QueryDsl.update(entity).set {
+                entity.roadId eq resource.roadId
+            }.where {
+                entity.id eq resource.id
+            }
+        }
+        return find(resource.id)
+    }
+
     override suspend fun delete(id: Int) {
         database.runQuery {
             QueryDsl.delete(entity).where { entity.id eq id }

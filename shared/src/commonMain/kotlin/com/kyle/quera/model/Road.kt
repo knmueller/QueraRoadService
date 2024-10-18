@@ -13,7 +13,7 @@ enum class SurfaceType {
 
 @Serializable
 data class Road(
-    val id: Int = 0,
+    var id: Int = 0,
     val surfaceType: SurfaceType,
     val intersectionId: Int, // FK
     val createdAt: LocalDateTime? = null,

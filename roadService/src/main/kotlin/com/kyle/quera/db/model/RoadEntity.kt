@@ -60,6 +60,18 @@ class RoadTable : EntityWrapper<_RoadEntity, Road>(RoadMeta.road) {
         }
     }
 
+    override suspend fun update(resource: Road): Road {
+        val numUpdated = database.runQuery {
+            QueryDsl.update(entity).set {
+                entity.surfaceType eq resource.surfaceType
+                entity.intersectionId eq resource.intersectionId
+            }.where {
+                entity.id eq resource.id
+            }
+        }
+        return find(resource.id)
+    }
+
     override suspend fun delete(id: Int) {
         database.runQuery {
             QueryDsl.delete(entity).where { entity.id eq id }

@@ -22,9 +22,8 @@ class SignsService : KoinComponent {
         return db.createResource(newSign)
     }
 
-    // TODO update resource
-    suspend fun updateResource(sign: Sign) {
-        throw NotImplementedError("update not yet implemented")
+    suspend fun updateResource(sign: Sign): Sign {
+        return db.updateResource(sign)
     }
 
     suspend fun getResource(id: Int): Sign {

@@ -89,7 +89,11 @@ Connection information:
 *** The db is created on the FIRST api access.
 
 ## Accessing API docs
+Swagger docs are hosted at /api/1/swagger. To view, visit [http://<host>/api/1/swagger]() in a browser.
 
+NOTE - The generation was done through third party plugin `io.github.tabilzad.ktor-docs-plugin-gradle`, but
+due to what seems to be an issue in the plugin, the docker build is failing. The docs were generated
+and copied to the roadService resources directory.
 
 ## API Test Collection
 There are a few test setup in `/api-test-collection/insomnia/Insomnia_Road-service-tests.json`. This
@@ -98,12 +102,5 @@ file can be imported to the [Insomnia app](https://insomnia.rest/) and run again
 There shouldn't be any environment used except for the `url`
 
 ### TODO 
-X - request validation
-- this readme
-- more unittests
-- api tests
 - add insomnia collection to repo
-- PUT apis
 - docker (i think completed ?)
-- remove unused imports and code
-- api docs

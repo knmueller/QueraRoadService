@@ -115,6 +115,7 @@ abstract class EntityWrapper<T : `org.komapper.core.dsl.metamodel`.EntityMetamod
     protected val database by inject<Database>()
     protected abstract suspend fun count(): Long
     protected abstract suspend fun create(resource: E): E
+    protected abstract suspend fun update(resource: E): E
     protected abstract suspend fun delete(id: Int)
     protected abstract suspend fun find(id: Int): E
     protected abstract suspend fun findAll(pas: PagingAndSorting): List<E>
@@ -122,6 +123,7 @@ abstract class EntityWrapper<T : `org.komapper.core.dsl.metamodel`.EntityMetamod
 
     override suspend fun countResource(): Long = count()
     override suspend fun createResource(resource: E): E = create(resource)
+    override suspend fun updateResource(resource: E): E = update(resource)
     override suspend fun deleteResource(id: Int) = delete(id)
     override suspend fun getResource(id: Int): E = find(id)
     override suspend fun getResources(pagingAndSorting: PagingAndSorting): List<E> =

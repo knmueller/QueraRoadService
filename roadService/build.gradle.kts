@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -6,6 +5,7 @@ plugins {
     alias(libs.plugins.ktor)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlinSerialization)
+    id("io.github.tabilzad.ktor-docs-plugin-gradle") version "0.6.4-alpha"
     application
 }
 
@@ -51,15 +51,8 @@ dependencies {
     implementation(libs.r2dbc.migrate.impl)
     ksp(libs.komapper.processor)
 
-    // Documentation TODO
-//    implementation(files("../../kompendium/core/build/libs/kompendium-core-4.1.0-SNAPSHOT.jar"))
-//    implementation(files("../../kompendium/enrichment/build/libs/kompendium-enrichment-4.1.0-SNAPSHOT.jar"))
-//    implementation(files("../../kompendium/json-schema/build/libs/kompendium-json-schema-4.1.0-SNAPSHOT.jar"))
-//    implementation(files("../../kompendium/oas/build/libs/kompendium-oas-4.1.0-SNAPSHOT.jar"))
-//    implementation(files("../../kompendium/resources/build/libs/kompendium-resources-4.1.0-SNAPSHOT.jar"))
-//    implementation("io.bkbn:kompendium-core:latest.release")
-//    implementation("io.bkbn:kompendium-resources:4.0.0-alpha")
-//    implementation("io.ktor:ktor-server-swagger")
+    // Documentation
+    implementation("io.ktor:ktor-server-swagger")
 
     testImplementation(kotlin("test"))
     testImplementation(libs.mockk)
@@ -68,9 +61,29 @@ dependencies {
     testImplementation(libs.ktor.client.content.negotiation)
 }
 
+swagger {
+
+    documentation {
+        docsTitle = "Road Service API"
+        docsDescription = "CRUD operations for Road Service API"
+        docsVersion = "1.0"
+        generateRequestSchemas = true
+        hideTransientFields = true
+        hidePrivateAndInternalFields = true
+        deriveFieldRequirementFromTypeNullability = true
+    }
+
+    pluginOptions {
+        format = "yaml"
+    }
+}
+
 tasks.withType<KotlinCompile> { // Settings for `KotlinCompile` tasks
     compilerOptions {
         freeCompilerArgs.add("-opt-in=org.komapper.annotation.KomapperExperimentalAssociation")
-        jvmTarget.set(JvmTarget.JVM_21)
     }
+}
+
+tasks.buildFatJar {
+    dependsOn(tasks.build)
 }

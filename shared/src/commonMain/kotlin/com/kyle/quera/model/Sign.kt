@@ -7,7 +7,7 @@ object SignMeta
 
 @Serializable
 data class Sign(
-    val id: Int = 0,
+    var id: Int = 0,
     val roadId: Int, // FK
     val createdAt: LocalDateTime? = null,
     val updatedAt: LocalDateTime? = null,

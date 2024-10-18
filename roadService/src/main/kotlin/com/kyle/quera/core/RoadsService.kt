@@ -24,9 +24,8 @@ class RoadsService : KoinComponent {
         return db.createResource(newRoad)
     }
 
-    // TODO update resource
-    suspend fun updateResource(road: Road) {
-        throw NotImplementedError("update not yet implemented")
+    suspend fun updateResource(road: Road): Road {
+        return db.updateResource(road)
     }
 
     suspend fun getResource(id: Int): Road {

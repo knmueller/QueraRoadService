@@ -7,9 +7,10 @@ import com.kyle.quera.config.configureKoin
 import com.kyle.quera.route.configureIntersectionRoutes
 import com.kyle.quera.route.configureRoadRoutes
 import com.kyle.quera.route.configureSignRoutes
-//import io.github.tabilzad.ktor.annotations.GenerateOpenApi
+import io.github.tabilzad.ktor.annotations.GenerateOpenApi
 import io.ktor.server.application.*
 import io.ktor.server.netty.*
+import io.ktor.server.plugins.swagger.swaggerUI
 import io.ktor.server.resources.Resources
 import io.ktor.server.routing.routing
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -22,7 +23,7 @@ import java.net.BindException
 fun main(args: Array<String>): Unit = EngineMain.main(args)
 
 @ExperimentalSerializationApi
-//@GenerateOpenApi
+//@GenerateOpenApi  // Disabled due to issue with docker build
 fun Application.module() {
     monitor.subscribe(KoinApplicationStarted) {
         log.info("Koin started.")
@@ -37,40 +38,14 @@ fun Application.module() {
     configureCommonStatusPages()
 
     install(Resources)
-//    install(NotarizedApplication()) {
-//        spec = {
-//            OpenApiSpec(
-//                "3.1.0",
-//                "https://json-schema.org/draft/2020-12/schema",
-//                info = Info(
-//                    title = "Golf League API",
-//                    version = "1.0",
-//                    description = "Golf League Administration",
-//                    contact = Contact(
-//                        name = "Kyle Mueller",
-//                        email = "kylenmueller@gmail.com",
-//                    )
-//                ),
-//                servers = mutableListOf(
-//                    io.bkbn.kompendium.oas.server.Server(
-//                        url = URI("http://localhost:8081"),
-//                        description = "local instance of my API"
-//                    )
-//                ),
-//                tags = mutableListOf(
-//                    Tag("courses", "courses api")
-//                )
-//            )
-//        }
-//    }
     rootPath = "/api/1"
     routing {
-//        swaggerUI("/swagger", "/openapi.json")
-//        swagger()
-//        redoc()
         configureIntersectionRoutes()
         configureRoadRoutes()
         configureSignRoutes()
+        swaggerUI("swagger","openapi/openapi.yaml"){
+            version = "5.17.12"
+        }
     }
 
     // jdbc:h2:mem:road_db

@@ -7,7 +7,7 @@ object IntersectionMeta
 
 @Serializable
 data class Intersection(
-    val id: Int = 0,
+    var id: Int = 0,
     val name: String,
     val createdAt: LocalDateTime? = null,
     val updatedAt: LocalDateTime? = null,

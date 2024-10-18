@@ -1,0 +1,688 @@
+---
+openapi: "3.1.0"
+info:
+  title: "Road Service API"
+  description: "CRUD operations for Road Service API"
+  version: "1.0"
+paths:
+  /intersections:
+    get:
+      summary: "Get all intersections"
+      description: "Returns intersections according to query params"
+      tags:
+      - "Intersections"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.PagedResponse"
+      parameters:
+      - name: "sort"
+        in: "query"
+        required: true
+        description: "Intersections sort order"
+        schema:
+          type: "string"
+      - name: "page"
+        in: "query"
+        required: true
+        description: "Intersections page number"
+        schema:
+          type: "string"
+      - name: "size"
+        in: "query"
+        required: true
+        description: "Intersections size of page"
+        schema:
+          type: "string"
+    post:
+      summary: "Create a new intersection"
+      description: "Returns the new intersection resource"
+      tags:
+      - "Intersections"
+      responses:
+        "201":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.Intersection"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.ErrorResponse"
+      parameters:
+      - name: "sort"
+        in: "query"
+        required: true
+        description: "Intersections sort order"
+        schema:
+          type: "string"
+      - name: "page"
+        in: "query"
+        required: true
+        description: "Intersections page number"
+        schema:
+          type: "string"
+      - name: "size"
+        in: "query"
+        required: true
+        description: "Intersections size of page"
+        schema:
+          type: "string"
+  /intersections/{id}:
+    get:
+      summary: "Get intersection by id"
+      description: "Returns intersection by id"
+      tags:
+      - "Intersections"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.Intersection"
+        "404":
+          description: "Resource not found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.ErrorResponse"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        description: "Intersection identifier"
+        schema:
+          type: "string"
+    put:
+      summary: "Update an intersection"
+      description: "Returns the updated intersection resource"
+      tags:
+      - "Intersections"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.Intersection"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.ErrorResponse"
+        "404":
+          description: "Resource not found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.ErrorResponse"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        description: "Intersection identifier"
+        schema:
+          type: "string"
+    delete:
+      summary: "Delete an intersection"
+      tags:
+      - "Intersections"
+      responses:
+        "204":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/kotlin.Unit"
+        "404":
+          description: "Resource not found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.ErrorResponse"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        description: "Intersection identifier"
+        schema:
+          type: "string"
+  /roads:
+    get:
+      summary: "Get all roads"
+      description: "Returns roads according to query params"
+      tags:
+      - "Roads"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.PagedResponse"
+      parameters:
+      - name: "intersectionId"
+        in: "query"
+        required: false
+        description: "Intersection identifier for GET association"
+        schema:
+          type: "string"
+      - name: "sort"
+        in: "query"
+        required: true
+        description: "Roads sort order"
+        schema:
+          type: "string"
+      - name: "page"
+        in: "query"
+        required: true
+        description: "Roads page number"
+        schema:
+          type: "string"
+      - name: "size"
+        in: "query"
+        required: true
+        description: "Roads size of page"
+        schema:
+          type: "string"
+    post:
+      summary: "Create a new road"
+      description: "Returns the new road resource"
+      tags:
+      - "Roads"
+      responses:
+        "201":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.Road"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.ErrorResponse"
+      parameters:
+      - name: "intersectionId"
+        in: "query"
+        required: false
+        description: "Intersection identifier for GET association"
+        schema:
+          type: "string"
+      - name: "sort"
+        in: "query"
+        required: true
+        description: "Roads sort order"
+        schema:
+          type: "string"
+      - name: "page"
+        in: "query"
+        required: true
+        description: "Roads page number"
+        schema:
+          type: "string"
+      - name: "size"
+        in: "query"
+        required: true
+        description: "Roads size of page"
+        schema:
+          type: "string"
+  /roads/{id}:
+    get:
+      summary: "Get road by id"
+      description: "Returns road by id"
+      tags:
+      - "Roads"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.Road"
+        "404":
+          description: "Resource not found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.ErrorResponse"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        description: "Road identifier"
+        schema:
+          type: "string"
+    put:
+      summary: "Update a road"
+      description: "Returns the updated road resource"
+      tags:
+      - "Roads"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.Road"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.ErrorResponse"
+        "404":
+          description: "Resource not found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.ErrorResponse"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        description: "Road identifier"
+        schema:
+          type: "string"
+    delete:
+      summary: "Delete a road"
+      tags:
+      - "Roads"
+      responses:
+        "204":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/kotlin.Unit"
+        "404":
+          description: "Resource not found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.ErrorResponse"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        description: "Road identifier"
+        schema:
+          type: "string"
+  /signs:
+    get:
+      summary: "Get all signs"
+      description: "Returns signs according to query params"
+      tags:
+      - "Signs"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.PagedResponse"
+      parameters:
+      - name: "roadId"
+        in: "query"
+        required: false
+        description: "Road identifier for GET association"
+        schema:
+          type: "string"
+      - name: "sort"
+        in: "query"
+        required: true
+        description: "Signs sort order"
+        schema:
+          type: "string"
+      - name: "page"
+        in: "query"
+        required: true
+        description: "Signs page number"
+        schema:
+          type: "string"
+      - name: "size"
+        in: "query"
+        required: true
+        description: "Signs size of page"
+        schema:
+          type: "string"
+    post:
+      summary: "Create a new sign"
+      description: "Returns the new sign resource"
+      tags:
+      - "Signs"
+      responses:
+        "201":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.Sign"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.ErrorResponse"
+      parameters:
+      - name: "roadId"
+        in: "query"
+        required: false
+        description: "Road identifier for GET association"
+        schema:
+          type: "string"
+      - name: "sort"
+        in: "query"
+        required: true
+        description: "Signs sort order"
+        schema:
+          type: "string"
+      - name: "page"
+        in: "query"
+        required: true
+        description: "Signs page number"
+        schema:
+          type: "string"
+      - name: "size"
+        in: "query"
+        required: true
+        description: "Signs size of page"
+        schema:
+          type: "string"
+  /signs/{id}:
+    get:
+      summary: "Get sign by id"
+      description: "Returns sign by id"
+      tags:
+      - "Signs"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.Sign"
+        "404":
+          description: "Resource not found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.ErrorResponse"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        description: "Sign identifier"
+        schema:
+          type: "string"
+    put:
+      summary: "Update a sign"
+      description: "Returns the updated sign resource"
+      tags:
+      - "Signs"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.Sign"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.ErrorResponse"
+        "404":
+          description: "Resource not found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.ErrorResponse"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        description: "Sign identifier"
+        schema:
+          type: "string"
+    delete:
+      summary: "Delete a sign"
+      tags:
+      - "Signs"
+      responses:
+        "204":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/kotlin.Unit"
+        "404":
+          description: "Resource not found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/com.kyle.quera.model.ErrorResponse"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        description: "Sign identifier"
+        schema:
+          type: "string"
+components:
+  schemas:
+    UNKNOWN:
+      type: "object"
+    com.kyle.quera.model.ErrorResponse:
+      type: "object"
+      properties:
+        code:
+          type: "integer"
+        details:
+          type: "string"
+        message:
+          type: "string"
+      required:
+      - "message"
+      - "code"
+      - "details"
+    com.kyle.quera.model.Intersection:
+      type: "object"
+      properties:
+        createdAt:
+          $ref: "#/components/schemas/kotlinx.datetime.LocalDateTime"
+        id:
+          type: "integer"
+        name:
+          type: "string"
+        updatedAt:
+          $ref: "#/components/schemas/kotlinx.datetime.LocalDateTime"
+      required:
+      - "id"
+      - "name"
+    com.kyle.quera.model.PagedResponse:
+      type: "object"
+      properties:
+        elements:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/null"
+        page:
+          type: "integer"
+        size:
+          type: "integer"
+        total:
+          type: "integer"
+      required:
+      - "elements"
+      - "page"
+      - "size"
+      - "total"
+    com.kyle.quera.model.Road:
+      type: "object"
+      properties:
+        createdAt:
+          $ref: "#/components/schemas/kotlinx.datetime.LocalDateTime"
+        id:
+          type: "integer"
+        intersectionId:
+          type: "integer"
+        surfaceType:
+          type: "string"
+          enum:
+          - "asphalt"
+          - "concrete"
+          - "gravel"
+        updatedAt:
+          $ref: "#/components/schemas/kotlinx.datetime.LocalDateTime"
+      required:
+      - "id"
+      - "surfaceType"
+      - "intersectionId"
+    com.kyle.quera.model.Sign:
+      type: "object"
+      properties:
+        createdAt:
+          $ref: "#/components/schemas/kotlinx.datetime.LocalDateTime"
+        id:
+          type: "integer"
+        roadId:
+          type: "integer"
+        updatedAt:
+          $ref: "#/components/schemas/kotlinx.datetime.LocalDateTime"
+      required:
+      - "id"
+      - "roadId"
+    kotlin.Unit:
+      type: "object"
+      properties: {}
+    kotlinx.datetime.LocalDate:
+      type: "object"
+      properties:
+        dayOfMonth:
+          type: "integer"
+        dayOfWeek:
+          type: "string"
+          enum:
+          - "MONDAY"
+          - "TUESDAY"
+          - "WEDNESDAY"
+          - "THURSDAY"
+          - "FRIDAY"
+          - "SATURDAY"
+          - "SUNDAY"
+        dayOfYear:
+          type: "integer"
+        month:
+          type: "string"
+          enum:
+          - "JANUARY"
+          - "FEBRUARY"
+          - "MARCH"
+          - "APRIL"
+          - "MAY"
+          - "JUNE"
+          - "JULY"
+          - "AUGUST"
+          - "SEPTEMBER"
+          - "OCTOBER"
+          - "NOVEMBER"
+          - "DECEMBER"
+        monthNumber:
+          type: "integer"
+        year:
+          type: "integer"
+      required:
+      - "dayOfMonth"
+      - "dayOfWeek"
+      - "dayOfYear"
+      - "month"
+      - "monthNumber"
+      - "year"
+    kotlinx.datetime.LocalDateTime:
+      type: "object"
+      properties:
+        date:
+          $ref: "#/components/schemas/kotlinx.datetime.LocalDate"
+        dayOfMonth:
+          type: "integer"
+        dayOfWeek:
+          type: "string"
+          enum:
+          - "MONDAY"
+          - "TUESDAY"
+          - "WEDNESDAY"
+          - "THURSDAY"
+          - "FRIDAY"
+          - "SATURDAY"
+          - "SUNDAY"
+        dayOfYear:
+          type: "integer"
+        hour:
+          type: "integer"
+        minute:
+          type: "integer"
+        month:
+          type: "string"
+          enum:
+          - "JANUARY"
+          - "FEBRUARY"
+          - "MARCH"
+          - "APRIL"
+          - "MAY"
+          - "JUNE"
+          - "JULY"
+          - "AUGUST"
+          - "SEPTEMBER"
+          - "OCTOBER"
+          - "NOVEMBER"
+          - "DECEMBER"
+        monthNumber:
+          type: "integer"
+        nanosecond:
+          type: "integer"
+        second:
+          type: "integer"
+        time:
+          $ref: "#/components/schemas/kotlinx.datetime.LocalTime"
+        year:
+          type: "integer"
+      required:
+      - "date"
+      - "dayOfMonth"
+      - "dayOfWeek"
+      - "dayOfYear"
+      - "hour"
+      - "minute"
+      - "month"
+      - "monthNumber"
+      - "nanosecond"
+      - "second"
+      - "time"
+      - "year"
+    kotlinx.datetime.LocalTime:
+      type: "object"
+      properties:
+        hour:
+          type: "integer"
+        minute:
+          type: "integer"
+        nanosecond:
+          type: "integer"
+        second:
+          type: "integer"
+      required:
+      - "hour"
+      - "minute"
+      - "nanosecond"
+      - "second"

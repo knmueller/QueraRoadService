@@ -41,6 +41,11 @@ interface DAOFacade<T> : Closeable {
     suspend fun createResource(resource: T): T
 
     /**
+     * Updates a resource from an object
+     */
+    suspend fun updateResource(resource: T): T
+
+    /**
      * Deletes a resource by its [id].
      */
     suspend fun deleteResource(id: Int)

@@ -46,6 +46,17 @@ class IntersectionTable : EntityWrapper<_IntersectionEntity, Intersection>(Inter
         }
     }
 
+    override suspend fun update(resource: Intersection): Intersection {
+        val numUpdated = database.runQuery {
+            QueryDsl.update(entity).set {
+                entity.name eq resource.name
+            }.where {
+                entity.id eq resource.id
+            }
+        }
+        return find(resource.id)
+    }
+
     override suspend fun delete(id: Int) {
         database.runQuery {
             QueryDsl.delete(entity).where { entity.id eq id }
