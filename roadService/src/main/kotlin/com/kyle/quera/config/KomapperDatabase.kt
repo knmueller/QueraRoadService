@@ -17,9 +17,9 @@ import org.komapper.r2dbc.R2dbcDatabaseConfig
 import org.slf4j.LoggerFactory
 
 
+// Wrapper class to execute r2db Komapper queries
 class R2DbKomapperImpl(database: R2dbcDatabase) : R2DbImpl<R2dbcDatabase>(database) {
     override suspend fun <T> runQuery(block: QueryScope.() -> Query<T>): T = r2DbImpl.runQuery(block)
-//    override suspend fun runQuery(query: EntityStoreQuery): EntityStore = r2DbImpl.runQuery(query)
 }
 
 // Komapper specific wrapper to the DB. If another DB is being used, another implementation of
@@ -30,6 +30,7 @@ class DatabaseImpl(logLevel: LogLevel = LogLevel.WARN) : DatabaseBaseImpl(logLev
         private val logger = LoggerFactory.getLogger(DatabaseBaseImpl::class.java)
     }
     override fun getDb(): R2DbImpl<*> {
+        // Migrate the database
         if (!MIGRATED) {
             logger.info("Starting database migration")
 
@@ -65,8 +66,4 @@ class DatabaseImpl(logLevel: LogLevel = LogLevel.WARN) : DatabaseBaseImpl(logLev
     override suspend fun <T> runQuery(block: QueryScope.() -> Query<T>): T {
         return database.runQuery(block)
     }
-
-//    override suspend fun runQuery(query: EntityStoreQuery): EntityStore {
-//        return database.runQuery(query)
-//    }
 }

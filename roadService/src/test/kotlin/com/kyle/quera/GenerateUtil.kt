@@ -3,8 +3,10 @@ package com.kyle.quera
 import com.kyle.quera.model.Intersection
 import com.kyle.quera.model.Road
 import com.kyle.quera.model.Sign
+import com.kyle.quera.model.SurfaceType
 import kotlinx.datetime.LocalDateTime
 import kotlin.random.Random
+import kotlin.random.nextInt
 
 fun Intersection.Companion.generate(): Sequence<Intersection> = sequence {
     while (true) {
@@ -47,7 +49,7 @@ fun Road.Companion.generate(intersectionId: Int): Sequence<Road> = sequence {
         yield(
             Road(
                 id = Random.nextInt(0, 100),
-                surfaceType = String.generate(10),
+                surfaceType = SurfaceType.entries[Random.nextInt(0..2)],
                 intersectionId = intersectionId,
                 createdAt = created,
                 updatedAt = LocalDateTime(

@@ -91,15 +91,19 @@ Connection information:
 ## Accessing API docs
 
 
+## API Test Collection
+There are a few test setup in `/api-test-collection/insomnia/Insomnia_Road-service-tests.json`. This
+file can be imported to the [Insomnia app](https://insomnia.rest/) and run against the service. 
+
+There shouldn't be any environment used except for the `url`
+
 ### TODO 
 X - request validation
-- comment code
 - this readme
 - more unittests
 - api tests
 - add insomnia collection to repo
 - PUT apis
 - docker (i think completed ?)
-- caching
 - remove unused imports and code
-X - enum
+- api docs

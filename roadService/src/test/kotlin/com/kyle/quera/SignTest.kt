@@ -1,7 +1,7 @@
 package com.kyle.quera
 
-import DatabaseImpl
 import com.kyle.quera.config.AppModule
+import com.kyle.quera.config.DatabaseImpl
 import com.kyle.quera.core.SignsService
 import com.kyle.quera.db.common.DAOFacade
 import com.kyle.quera.db.common.Database

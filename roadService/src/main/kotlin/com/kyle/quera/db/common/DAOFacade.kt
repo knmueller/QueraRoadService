@@ -5,15 +5,12 @@ import org.komapper.core.dsl.query.QueryScope
 import java.io.Closeable
 
 /**
- * A DAO Facade interface for the Database. This allows to provide several implementations.
+ * A DAO Facade interface for the Database. This allows to provide implementation specifics
+ * without the need to change the callers.
  *
- * In this case this is used to provide a Database-based implementation using Komapper.
+ * In this case, a Komapper implementation is provided
  */
 interface DAOFacade<T> : Closeable {
-    /**
-     * Initializes all the required data.
-     */
-//    fun init()
 
     /**
      * Counts the number of resources.

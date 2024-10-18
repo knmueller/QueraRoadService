@@ -15,18 +15,21 @@ import io.ktor.server.plugins.statuspages.StatusPages
 import io.ktor.server.response.respond
 import java.util.NoSuchElementException
 
+// Add a default CORS config just accepting any host.
 fun Application.configureCommonCors() {
     install(CORS) {
         anyHost()
     }
 }
 
+// Add json for content negotiation
 fun Application.configureCommonContentNegotiation() {
     install(ContentNegotiation) {
         json(Utils.json)
     }
 }
 
+// Add common global exception handling for uncaught or known errors.
 fun Application.configureCommonStatusPages() {
     install(StatusPages) {
         exception<NoSuchElementException> { call, _ ->

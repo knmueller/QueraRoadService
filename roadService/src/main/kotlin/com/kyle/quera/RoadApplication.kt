@@ -7,6 +7,7 @@ import com.kyle.quera.config.configureKoin
 import com.kyle.quera.route.configureIntersectionRoutes
 import com.kyle.quera.route.configureRoadRoutes
 import com.kyle.quera.route.configureSignRoutes
+//import io.github.tabilzad.ktor.annotations.GenerateOpenApi
 import io.ktor.server.application.*
 import io.ktor.server.netty.*
 import io.ktor.server.resources.Resources
@@ -21,6 +22,7 @@ import java.net.BindException
 fun main(args: Array<String>): Unit = EngineMain.main(args)
 
 @ExperimentalSerializationApi
+//@GenerateOpenApi
 fun Application.module() {
     monitor.subscribe(KoinApplicationStarted) {
         log.info("Koin started.")
@@ -73,6 +75,7 @@ fun Application.module() {
 
     // jdbc:h2:mem:road_db
     try {
+        // Start an H2 webserver to view the database
         Server.createWebServer("-web", "-webAllowOthers", "-webPort", "8082").start()
     } catch (e: JdbcSQLNonTransientConnectionException) {
         if (e.cause !is BindException) {

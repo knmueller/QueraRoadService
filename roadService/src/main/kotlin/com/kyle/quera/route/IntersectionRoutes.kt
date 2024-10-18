@@ -22,6 +22,7 @@ class IntersectionsRequest(val sort: String = "createdAt,desc", val page: Int = 
     class Id(val parent: IntersectionsRequest = IntersectionsRequest(), val id: Int)
 }
 
+// All Intersection routes
 fun Routing.configureIntersectionRoutes() {
     val svc: IntersectionsService by inject(IntersectionsService::class.java)
 

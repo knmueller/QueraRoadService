@@ -41,10 +41,12 @@ fun databaseModule(environment: ApplicationEnvironment) =
         singleOf(::SignTable) { bind<DAOFacade<Sign>>() }
     }
 
+// Abstracted DB interface for usage in the app.
 interface Database {
     suspend fun <T> runQuery(block: QueryScope.() -> Query<T>): T
 }
 
+// Base DB impl to configure the DB from properties
 abstract class DatabaseBaseImpl(logLevel: LogLevel = LogLevel.WARN, cleanDB: Boolean = false) :
     Database, KoinComponent {
 
@@ -106,6 +108,7 @@ data class PagingAndSorting(
     val size: Int = 10
 )
 
+// Abstracted entity wrapper providing CRUD operations to the DB. Each table should extend this class
 abstract class EntityWrapper<T : `org.komapper.core.dsl.metamodel`.EntityMetamodel<*, *, *>, E>(
     protected val entity: T
 ) : KoinComponent, DAOFacade<E> {

@@ -1,7 +1,7 @@
 package com.kyle.quera
 
-import DatabaseImpl
 import com.kyle.quera.config.AppModule
+import com.kyle.quera.config.DatabaseImpl
 import com.kyle.quera.core.RoadsService
 import com.kyle.quera.db.common.DAOFacade
 import com.kyle.quera.db.common.Database
@@ -9,7 +9,7 @@ import com.kyle.quera.db.common.PagingAndSorting
 import com.kyle.quera.db.model.RoadTable
 import com.kyle.quera.model.Road
 import com.kyle.quera.model.PagedResponse
-import com.kyle.quera.model.Sign
+import com.kyle.quera.model.SurfaceType
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -304,7 +304,7 @@ class RoadTest : KoinTest {
     fun testRoadsPost() = testApplication {
         setupApp()
 
-        val roadPostBody = Road(surfaceType = "pavement", intersectionId = 4)
+        val roadPostBody = Road(surfaceType = SurfaceType.gravel, intersectionId = 4)
 
         declareMock<RoadTable> {
             coEvery { daoMock.createResource(any<Road>()) } returns

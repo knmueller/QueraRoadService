@@ -22,6 +22,7 @@ class SignsRequest(val roadId: Int? = null, val sort: String = "createdAt,desc",
     class Id(val parent: SignsRequest = SignsRequest(), val id: Int)
 }
 
+// All Sign routes
 fun Routing.configureSignRoutes() {
     val svc: SignsService by inject(SignsService::class.java)
 

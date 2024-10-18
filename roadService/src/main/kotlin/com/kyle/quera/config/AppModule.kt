@@ -11,10 +11,12 @@ import org.koin.ktor.plugin.Koin
 import org.koin.logger.slf4jLogger
 
 
+// Scan this package for Koin components
 @Module
 @ComponentScan("com.kyle.quera")
 class AppModule
 
+// Add the scanned components and the database environment.
 @ExperimentalSerializationApi
 fun Application.configureKoin() {
     install(Koin) {

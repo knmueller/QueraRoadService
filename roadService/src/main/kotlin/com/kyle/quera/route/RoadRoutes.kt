@@ -26,6 +26,7 @@ class RoadsRequest(
     class Id(val parent: RoadsRequest = RoadsRequest(), val id: Int)
 }
 
+// All Road routes
 fun Routing.configureRoadRoutes() {
     val svc: RoadsService by inject(RoadsService::class.java)
 

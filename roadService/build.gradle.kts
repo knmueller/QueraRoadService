@@ -49,7 +49,6 @@ dependencies {
     implementation(libs.komapper.dialect.h2.r2dbc)
     implementation(libs.r2dbc.migrate)
     implementation(libs.r2dbc.migrate.impl)
-//    runtimeOnly("org.komapper:komapper-datetime-r2dbc:$komapperVersion")
     ksp(libs.komapper.processor)
 
     // Documentation TODO
@@ -71,7 +70,7 @@ dependencies {
 
 tasks.withType<KotlinCompile> { // Settings for `KotlinCompile` tasks
     compilerOptions {
-        freeCompilerArgs.add("-opt-in=org.komapper.annotation.KomapperExperimentalAssociation") // `-Xjsr305=strict` enables the strict mode for JSR-305 annotations
+        freeCompilerArgs.add("-opt-in=org.komapper.annotation.KomapperExperimentalAssociation")
         jvmTarget.set(JvmTarget.JVM_21)
     }
 }
